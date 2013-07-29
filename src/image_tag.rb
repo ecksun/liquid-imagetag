@@ -48,7 +48,7 @@
 #        <figcaption>Image caption</figcaption>
 #      </figure>
 
-require('common.rb')
+require(File.dirname(__FILE__) + '/common.rb')
 
 module Jekyll
   class ImageTag < Liquid::Tag

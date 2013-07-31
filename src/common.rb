@@ -5,6 +5,7 @@ module Jekyll
     @class = nil
     @title = nil
     @thumb = false
+    @baseurl = ""
 
     IMAGE_URL_WITH_CLASS = /(\w+)(\s+)((https?:\/\/|\/)(\S+))/i
     IMAGE_URL = /((https?:\/\/|\/)(\S+))/i
@@ -30,6 +31,10 @@ module Jekyll
       @caption = caption
     end
 
+    def set_baseurl(baseurl)
+      @baseurl = baseurl
+    end
+
     def render()
       source = "\n"
       if @class
@@ -38,8 +43,8 @@ module Jekyll
         source += "<figure>\n"
       end
 
-      source += "<a href=\"#{@url}\">\n" if @thumb
-      source += "<img src=\"#{ @thumb ? get_thumb(@url) : @url}\" " + (@caption ? "alt=\"#{@caption}\" ":"") + (@title ? "title=\"#{@title}\" " : "") + "/>\n"
+      source += "<a href=\"#{ @baseurl }#{@url}\">\n" if @thumb
+      source += "<img src=\"#{ @baseurl }#{ @thumb ? get_thumb(@url) : @url}\" " + (@caption ? "alt=\"#{@caption}\" ":"") + (@title ? "title=\"#{@title}\" " : "") + "/>\n"
       source += "</a>\n" if @thumb
       source += "<figcaption>#{@caption}</figcaption>\n" if @caption
       source += "</figure>\n"

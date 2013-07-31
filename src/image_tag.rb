@@ -59,6 +59,9 @@ module Jekyll
     end
 
     def render(context)
+      if context.registers[:site].config['baseurl']
+        @image_tag.set_baseurl(context.registers[:site].config['baseurl'])
+      end
       @common.render()
     end
   end
@@ -71,6 +74,9 @@ module Jekyll
     end
 
     def render(context)
+      if context.registers[:site].config['baseurl']
+        @image_tag.set_baseurl(context.registers[:site].config['baseurl'])
+      end
       @image_tag.set_caption(super)
       @image_tag.render()
     end
